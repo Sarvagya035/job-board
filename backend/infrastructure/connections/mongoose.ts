@@ -1,5 +1,15 @@
-import * as mongoose from 'mongoose'
-mongoose.connect(`mongodb://${process.env.MONGO_HOST}/${process.env.MONGO_DB}`, {
+import mongoose from 'mongoose'
+import dotenv from "dotenv"
+dotenv.config()
+
+const MONGO_URI = process.env.MONGO_URI as string
+
+if (!MONGO_URI){
+
+    throw new Error("MONGO_URI is not defined in .env file")
+}
+
+mongoose.connect(MONGO_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 })

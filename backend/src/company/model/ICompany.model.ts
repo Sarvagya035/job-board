@@ -9,4 +9,5 @@ export interface ICompany extends Document {
     specialties: [string]
     location: string
     created_at: Date
+    is_active: Boolean
 }

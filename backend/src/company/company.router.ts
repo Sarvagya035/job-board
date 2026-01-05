@@ -1,10 +1,12 @@
-import { Router } from 'express';
-import { CompanyController } from './company.controller'
+import { Router } from "express"
+import { CompanyController } from "./company.controller"
 
-const companyRouter: Router = Router()
-const companyControllerInstance = new CompanyController()
+const companyRouter = Router()
+const companyController = new CompanyController()
 
-// Setup Routes
-companyRouter.get('/', companyControllerInstance.index)
+companyRouter.get("/", companyController.index)
+companyRouter.post("/", companyController.store)
+companyRouter.put("/:id", companyController.update)
+companyRouter.delete("/:id", companyController.delete)
 
 export { companyRouter }

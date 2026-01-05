@@ -1,10 +1,12 @@
-import { Router } from 'express';
-import { ListingsController } from './listings.controller'
+import { Router } from "express"
+import { ListingsController } from "./listings.controller"
 
-const listingsRouter: Router = Router()
+const listingsRouter = Router()
+const listingsController = new ListingsController()
 
-const listingsControllerInstance = new ListingsController()
-
-listingsRouter.get('/', listingsControllerInstance.index)
+listingsRouter.get("/", listingsController.index)
+listingsRouter.post("/", listingsController.store)
+listingsRouter.put("/:id", listingsController.update)
+listingsRouter.delete("/:id", listingsController.delete)
 
 export { listingsRouter }

@@ -1,5 +1,6 @@
-import * as express from 'express'
-import { Application } from 'express'
+import express, { Application } from 'express'
+import { RouteService } from './router/routeService'
+import "../infrastructure/connections/mongoose"
 
 export class App {
 
@@ -9,6 +10,9 @@ export class App {
     constructor(port:number) {
         this.app = express()
         this.port = port
+        this.app.use(express.json())
+        const routeService = new RouteService(this.app)
+        routeService.run()
     }
 
 
