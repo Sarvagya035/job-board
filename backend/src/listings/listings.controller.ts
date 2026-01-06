@@ -7,10 +7,12 @@ export class ListingsController {
     // GET /api/v1/listings
     async index(req: Request, res: Response) {
         try {
-            const listings = await Listing.find()
-            res.status(200).json({ data: listings })
-        } catch (error: any) {
-            res.status(500).json({
+                const listings = await Listing.find({ is_active: true })
+                    .populate("company")
+                res.status(200).json({ data: listings })
+                
+            } catch (error: any) {
+                res.status(500).json({
                 message: "Error fetching listings",
                 error: error.message
             })

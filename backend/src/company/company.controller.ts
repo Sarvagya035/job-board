@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { Company } from "./model/Company.model"
+import { Listing } from "../listings/model/Listing"
 
 export class CompanyController {
     constructor() {}
@@ -88,4 +89,23 @@ export class CompanyController {
             })
         }
     }
+
+    async listings(req: Request, res: Response) {
+        try {
+            const { id } = req.params
+
+            const listings = await Listing.find({
+                company: id,
+                is_active: true
+            })
+
+            res.status(200).json({ data: listings })
+        } catch (error: any) {
+            res.status(500).json({
+                message: "Error fetching company listings",
+                error: error.message
+            })
+        }
+    }
+
 }
